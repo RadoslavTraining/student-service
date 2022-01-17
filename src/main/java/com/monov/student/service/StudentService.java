@@ -1,17 +1,12 @@
 package com.monov.student.service;
 
-import com.monov.student.data.CourseIds;
 import com.monov.student.entity.Student;
 import com.monov.student.repository.StudentRepository;
-import com.monov.student.data.Course;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Slf4j
@@ -22,9 +17,6 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     public Student saveStudent(Student student) {
         log.info("Inside saveStudent method in StudentService");
@@ -40,15 +32,6 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public List<Course> getCoursesForStudent(Student student) {
-        log.info("Inside getCoursesForStudent method in StudentService");
-        CourseIds courseIds = new CourseIds(student.getCourseIds());
-        List<Course> courses = Arrays.asList(Objects.requireNonNull(
-                restTemplate.postForObject(String.format("http://%s/%s/ids",API_GATEWAY, COURSES_ENDPOINT), courseIds,
-                        Course[].class)));
-        return courses;
-    }
-
     public Student addCourseToStudent(Long studentId, Long courseId) {
         Student studentToEdit = findStudentById(studentId);
         studentToEdit.getCourseIds().add(courseId);
@@ -56,4 +39,12 @@ public class StudentService {
         return  studentToEdit;
     }
 
+    // To Do
+    // Created by Radoslav Monov 14.01.2022
+    // https://estafetducationsite.atlassian.net/browse/ED-11
+    // Create endpoint to get all students that attend a certain course
+    public List<Student> getStudentsByCourseId(Long courseId) {
+
+        return null;
+    }
 }
