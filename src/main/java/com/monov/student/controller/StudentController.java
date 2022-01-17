@@ -40,7 +40,7 @@ public class StudentController {
         return  studentService.addCourseToStudent(studentId,courseId);
     }
 
-    @GetMapping("/course/{id}")
+    @GetMapping("/courses/{id}")
     public List<Student> findStudentsByCourseId(@PathVariable("id") Long id) {
         return studentService.getStudentsByCourseId(id);
     }

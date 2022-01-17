@@ -40,6 +40,9 @@ public class StudentService {
     }
 
     // To Do
+    // Created by Radoslav Monov 14.01.2022
+    // https://estafetducationsite.atlassian.net/browse/ED-11
+    // Create endpoint to get all students that attend a certain course
     public List<Student> getStudentsByCourseId(Long courseId) {
 
         return null;
