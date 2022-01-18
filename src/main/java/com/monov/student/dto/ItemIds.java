@@ -1,4 +1,4 @@
-package com.monov.student.data;
+package com.monov.student.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package com.monov.student.controller;
 
-import com.monov.student.data.ItemIds;
+import com.monov.student.dto.ItemIds;
+import com.monov.student.dto.StudentDTO;
 import com.monov.student.entity.Student;
 import com.monov.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,25 +19,25 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public List<Student > findAllStudents() {
+    public List<StudentDTO> findAllStudents() {
         log.info("Inside findAllStudents method of StudentController ");
         return studentService.findAllStudents();
     }
 
     @PostMapping
-    public Student saveStudent(@RequestBody Student student) {
+    public StudentDTO saveStudent(@RequestBody Student student) {
         log.info("Inside saveStudent method of StudentController ");
         return studentService.saveStudent(student);
     }
 
     @GetMapping("/{id}")
-    public Student findStudentById(@PathVariable("id") Long studentId) {
+    public StudentDTO findStudentById(@PathVariable("id") Long studentId) {
         log.info("Inside findStudentById method of StudentController ");
         return studentService.findStudentById(studentId);
     }
 
     @PostMapping("/ids")
-    public List<Student> findStudentsByIds(@RequestBody ItemIds studentIds) {
+    public List<StudentDTO> findStudentsByIds(@RequestBody ItemIds studentIds) {
         return studentService.findStudentsByIds(studentIds);
     }
 

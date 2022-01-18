@@ -1,4 +1,4 @@
-package com.monov.student.data;
+package com.monov.student.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class CourseDTO {
 
     private Long courseId;
     private String name;
