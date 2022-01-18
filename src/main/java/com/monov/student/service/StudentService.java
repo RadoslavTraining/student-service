@@ -23,7 +23,7 @@ public class StudentService {
 
     public Student findStudentById(Long studentId) {
         log.info("Inside findStudentById method in StudentService");
-        return studentRepository.findByStudentId(studentId);
+        return studentRepository.findById(studentId).get();
     }
 
     public List<Student> findAllStudents(){
