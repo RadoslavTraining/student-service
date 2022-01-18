@@ -19,7 +19,7 @@ public class Student {
     private Long studentId;
     private String firstName;
     private String lastName;
-    @ElementCollection
-    private List<Long> courseIds;
+//    @ElementCollection
+//    private List<Long> courseIds;
 
 }

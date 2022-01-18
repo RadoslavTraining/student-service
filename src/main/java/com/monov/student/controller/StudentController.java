@@ -1,5 +1,6 @@
 package com.monov.student.controller;
 
+import com.monov.student.data.ItemIds;
 import com.monov.student.entity.Student;
 import com.monov.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,15 +34,19 @@ public class StudentController {
         return studentService.findStudentById(studentId);
     }
 
-    @PostMapping("/{studentId}/{courseId}")
-    public Student addCourseToStudent(@PathVariable("studentId") Long studentId,
-                                      @PathVariable("courseId") Long courseId) {
-        log.info("Inside addCourseToStudent method of StudentController ");
-        return  studentService.addCourseToStudent(studentId,courseId);
+    @PostMapping("/ids")
+    public List<Student> findStudentsByIds(@RequestBody ItemIds studentIds) {
+        return studentService.findStudentsByIds(studentIds);
     }
+//    @PostMapping("/{studentId}/{courseId}")
+//    public Student addCourseToStudent(@PathVariable("studentId") Long studentId,
+//                                      @PathVariable("courseId") Long courseId) {
+//        log.info("Inside addCourseToStudent method of StudentController ");
+//        return  studentService.addCourseToStudent(studentId,courseId);
+//    }
 
-    @GetMapping("/courses/{id}")
-    public List<Student> findStudentsByCourseId(@PathVariable("id") Long id) {
-        return studentService.getStudentsByCourseId(id);
-    }
+//    @GetMapping("/courses/{id}")
+//    public List<Student> findStudentsByCourseId(@PathVariable("id") Long id) {
+//        return studentService.getStudentsByCourseId(id);
+//    }
 }
