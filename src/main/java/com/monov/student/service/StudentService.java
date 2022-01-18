@@ -13,9 +13,6 @@ import java.util.List;
 @Slf4j
 public class StudentService {
 
-    private static final String API_GATEWAY = "API-GATEWAY";
-    private static final String COURSES_ENDPOINT = "courses";
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -32,22 +29,6 @@ public class StudentService {
     public List<Student> findAllStudents(){
         return studentRepository.findAll();
     }
-
-//    public Student addCourseToStudent(Long studentId, Long courseId) {
-//        Student studentToEdit = findStudentById(studentId);
-//        studentToEdit.getCourseIds().add(courseId);
-//        studentRepository.save(studentToEdit);
-//        return  studentToEdit;
-//    }
-
-    // To Do
-    // Created by Radoslav Monov 14.01.2022
-    // https://estafetducationsite.atlassian.net/browse/ED-11
-    // Create endpoint to get all students that attend a certain course
-//    public List<Student> getStudentsByCourseId(Long courseId) {
-//
-//        return null;
-//    }
 
     public List<Student> findStudentsByIds(ItemIds studentIds) {
         return studentRepository.findAllById(studentIds.getIds());

@@ -6,6 +6,7 @@ import com.monov.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -38,15 +39,5 @@ public class StudentController {
     public List<Student> findStudentsByIds(@RequestBody ItemIds studentIds) {
         return studentService.findStudentsByIds(studentIds);
     }
-//    @PostMapping("/{studentId}/{courseId}")
-//    public Student addCourseToStudent(@PathVariable("studentId") Long studentId,
-//                                      @PathVariable("courseId") Long courseId) {
-//        log.info("Inside addCourseToStudent method of StudentController ");
-//        return  studentService.addCourseToStudent(studentId,courseId);
-//    }
 
-//    @GetMapping("/courses/{id}")
-//    public List<Student> findStudentsByCourseId(@PathVariable("id") Long id) {
-//        return studentService.getStudentsByCourseId(id);
-//    }
 }
