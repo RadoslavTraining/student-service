@@ -1,7 +1,7 @@
 package com.monov.student.controller;
 
-import com.monov.student.dto.ItemIds;
-import com.monov.student.dto.StudentDTO;
+import com.monov.commons.dto.ItemIds;
+import com.monov.commons.dto.StudentDTO;
 import com.monov.student.entity.Student;
 import com.monov.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;

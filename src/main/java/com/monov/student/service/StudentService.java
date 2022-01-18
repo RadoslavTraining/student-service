@@ -1,7 +1,7 @@
 package com.monov.student.service;
 
-import com.monov.student.dto.ItemIds;
-import com.monov.student.dto.StudentDTO;
+import com.monov.commons.dto.ItemIds;
+import com.monov.commons.dto.StudentDTO;
 import com.monov.student.entity.Student;
 import com.monov.student.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +20,12 @@ public class StudentService {
 
     public StudentDTO saveStudent(Student student) {
         log.info("Inside saveStudent method in StudentService");
-        return new StudentDTO(studentRepository.save(student));
+        return convertToStudentDTO(studentRepository.save(student));
     }
 
     public StudentDTO findStudentById(Long studentId) {
         log.info("Inside findStudentById method in StudentService");
-        return new StudentDTO(studentRepository.findById(studentId).get());
+        return convertToStudentDTO(studentRepository.findById(studentId).get());
     }
 
     public List<StudentDTO> findAllStudents(){
@@ -38,7 +38,16 @@ public class StudentService {
 
     private List<StudentDTO> convertToStudentDTOs(List<Student> studentEntities) {
         return studentEntities.stream()
-                .map(StudentDTO::new)
+                .map(this::convertToStudentDTO)
                 .collect(Collectors.toList());
+    }
+
+    private StudentDTO convertToStudentDTO(Student student) {
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(student.getId());
+        studentDTO.setFirstName(student.getFirstName());
+        studentDTO.setLastName(student.getLastName());
+
+        return studentDTO;
     }
 }
