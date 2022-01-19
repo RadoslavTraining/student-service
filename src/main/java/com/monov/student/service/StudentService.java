@@ -3,12 +3,14 @@ package com.monov.student.service;
 import com.monov.commons.dto.ItemIds;
 import com.monov.commons.dto.StudentDTO;
 import com.monov.student.entity.Student;
+import com.monov.student.exception.StudentNotFoundException;
 import com.monov.student.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +27,11 @@ public class StudentService {
 
     public StudentDTO findStudentById(Long studentId) {
         log.info("Inside findStudentById method in StudentService");
-        return convertToStudentDTO(studentRepository.findById(studentId).get());
+        Optional<Student> student = studentRepository.findById(studentId);
+        if(student.isPresent()) {
+            return convertToStudentDTO(student.get());
+        }
+        throw new StudentNotFoundException();
     }
 
     public List<StudentDTO> findAllStudents(){
