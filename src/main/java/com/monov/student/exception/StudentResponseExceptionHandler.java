@@ -2,6 +2,7 @@ package com.monov.student.exception;
 
 import com.monov.commons.exceptions.ItemNotFoundException;
 import com.monov.student.response.StudentResponseHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,6 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class StudentResponseExceptionHandler extends ResponseEntityExceptionHandler {
+    @Value("${exceptions.itemnotfound.message}")
+    private String itemNotFoundMessage;
 
     @ExceptionHandler(ItemNotFoundException.class)
     public ResponseEntity<String> handleCourseNotFoundException(ItemNotFoundException ex) {
