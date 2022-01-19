@@ -2,8 +2,8 @@ package com.monov.student.service;
 
 import com.monov.commons.dto.ItemIds;
 import com.monov.commons.dto.StudentDTO;
+import com.monov.commons.exceptions.ItemNotFoundException;
 import com.monov.student.entity.Student;
-import com.monov.student.exception.StudentNotFoundException;
 import com.monov.student.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class StudentService {
         if(student.isPresent()) {
             return convertToStudentDTO(student.get());
         }
-        throw new StudentNotFoundException();
+        throw new ItemNotFoundException(studentId);
     }
 
     public List<StudentDTO> findAllStudents(){
