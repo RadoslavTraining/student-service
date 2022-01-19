@@ -17,6 +17,4 @@ public class StudentResponseExceptionHandler extends ResponseEntityExceptionHand
                 HttpStatus.NOT_FOUND);
     }
 
-
-
 }

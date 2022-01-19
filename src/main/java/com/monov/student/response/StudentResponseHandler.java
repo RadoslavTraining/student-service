@@ -1,6 +1,5 @@
 package com.monov.student.response;
 
-import com.monov.commons.dto.CourseDTO;
 import com.monov.commons.dto.StudentDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
