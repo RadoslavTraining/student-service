@@ -15,5 +15,5 @@ eureka:
     hostname: localhost
 
 exceptions:
-  itemnotfound:
+  item-not-found:
     message: Student with id %d not found
