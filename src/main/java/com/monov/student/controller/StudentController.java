@@ -30,21 +30,18 @@ public class StudentController {
     public ResponseEntity<List<StudentDTO>> findAllStudents() {
         log.info("Inside findAllStudents method of StudentController ");
         return StudentResponseHandler.generateListSuccessResponse(HttpStatus.OK,studentService.findAllStudents());
-//        return studentService.findAllStudents();
     }
 
     @PostMapping
     public ResponseEntity<StudentDTO> saveStudent(@Valid  @RequestBody Student student) {
         log.info("Inside saveStudent method of StudentController ");
         return StudentResponseHandler.generateSuccessResponse(HttpStatus.OK,studentService.saveStudent(student));
-//        return studentService.saveStudent(student);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentDTO> findStudentById(@PathVariable("id") Long studentId) {
         log.info("Inside findStudentById method of StudentController ");
         return StudentResponseHandler.generateSuccessResponse(HttpStatus.OK, studentService.findStudentById(studentId));
-//        return studentService.findStudentById(studentId);
     }
 
     @PostMapping("/ids")
