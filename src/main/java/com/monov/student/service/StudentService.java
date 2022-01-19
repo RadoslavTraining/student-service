@@ -1,5 +1,7 @@
 package com.monov.student.service;
 
+import com.monov.commons.dto.ItemIds;
+import com.monov.commons.dto.StudentDTO;
 import com.monov.student.entity.Student;
 import com.monov.student.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -7,44 +9,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class StudentService {
 
-    private static final String API_GATEWAY = "API-GATEWAY";
-    private static final String COURSES_ENDPOINT = "courses";
-
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student saveStudent(Student student) {
+    public StudentDTO saveStudent(Student student) {
         log.info("Inside saveStudent method in StudentService");
-        return studentRepository.save(student);
+        return convertToStudentDTO(studentRepository.save(student));
     }
 
-    public Student findStudentById(Long studentId) {
+    public StudentDTO findStudentById(Long studentId) {
         log.info("Inside findStudentById method in StudentService");
-        return studentRepository.findByStudentId(studentId);
+        return convertToStudentDTO(studentRepository.findById(studentId).get());
     }
 
-    public List<Student> findAllStudents(){
-        return studentRepository.findAll();
+    public List<StudentDTO> findAllStudents(){
+        return convertToStudentDTOs(studentRepository.findAll());
     }
 
-    public Student addCourseToStudent(Long studentId, Long courseId) {
-        Student studentToEdit = findStudentById(studentId);
-        studentToEdit.getCourseIds().add(courseId);
-        studentRepository.save(studentToEdit);
-        return  studentToEdit;
+    public List<StudentDTO> findStudentsByIds(ItemIds studentIds) {
+        return convertToStudentDTOs(studentRepository.findAllById(studentIds.getIds()));
     }
 
-    // To Do
-    // Created by Radoslav Monov 14.01.2022
-    // https://estafetducationsite.atlassian.net/browse/ED-11
-    // Create endpoint to get all students that attend a certain course
-    public List<Student> getStudentsByCourseId(Long courseId) {
+    private List<StudentDTO> convertToStudentDTOs(List<Student> studentEntities) {
+        return studentEntities.stream()
+                .map(this::convertToStudentDTO)
+                .collect(Collectors.toList());
+    }
 
-        return null;
+    private StudentDTO convertToStudentDTO(Student student) {
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(student.getId());
+        studentDTO.setFirstName(student.getFirstName());
+        studentDTO.setLastName(student.getLastName());
+
+        return studentDTO;
     }
 }
