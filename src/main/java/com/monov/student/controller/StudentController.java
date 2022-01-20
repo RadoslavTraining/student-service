@@ -3,12 +3,20 @@ package com.monov.student.controller;
 import com.monov.commons.dto.ItemIds;
 import com.monov.commons.dto.StudentDTO;
 import com.monov.student.entity.Student;
+import com.monov.student.response.StudentResponseHandler;
 import com.monov.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/students")
@@ -19,26 +27,40 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public List<StudentDTO> findAllStudents() {
+    public ResponseEntity<List<StudentDTO>> findAllStudents() {
         log.info("Inside findAllStudents method of StudentController ");
-        return studentService.findAllStudents();
+        return StudentResponseHandler.generateListSuccessResponse(HttpStatus.OK,studentService.findAllStudents());
     }
 
     @PostMapping
-    public StudentDTO saveStudent(@RequestBody Student student) {
+    public ResponseEntity<StudentDTO> saveStudent(@Valid  @RequestBody Student student) {
         log.info("Inside saveStudent method of StudentController ");
-        return studentService.saveStudent(student);
+        return StudentResponseHandler.generateSuccessResponse(HttpStatus.OK,studentService.saveStudent(student));
     }
 
     @GetMapping("/{id}")
-    public StudentDTO findStudentById(@PathVariable("id") Long studentId) {
+    public ResponseEntity<StudentDTO> findStudentById(@PathVariable("id") Long studentId) {
         log.info("Inside findStudentById method of StudentController ");
-        return studentService.findStudentById(studentId);
+        return StudentResponseHandler.generateSuccessResponse(HttpStatus.OK, studentService.findStudentById(studentId));
     }
 
     @PostMapping("/ids")
-    public List<StudentDTO> findStudentsByIds(@RequestBody ItemIds studentIds) {
-        return studentService.findStudentsByIds(studentIds);
+    public ResponseEntity<List<StudentDTO>> findStudentsByIds(@RequestBody ItemIds studentIds) {
+        return StudentResponseHandler.generateListSuccessResponse(HttpStatus.OK,
+                studentService.findStudentsByIds(studentIds));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 
 }
