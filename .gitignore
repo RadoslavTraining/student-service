@@ -68,3 +68,4 @@ secrets.yml
 .sts4-cache
 
 *.bak
+target/**
