@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: STUDENT-SERVICE
+  jpa:
+    defer-datasource-initialization: true
 
 eureka:
   client:
