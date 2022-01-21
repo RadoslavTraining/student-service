@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = StudentServiceApplication.class)
 @AutoConfigureMockMvc
-@TestPropertySource(properties = { "spring.config.location = classpath:application-integrationtest.yaml" })
+@TestPropertySource(properties = { "spring.config.location = classpath:integration-test-application.yaml" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentControllerIntTest {
 
