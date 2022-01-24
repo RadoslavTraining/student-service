@@ -1,6 +1,6 @@
 package com.monov.student.service;
 
-import com.monov.commons.dto.ItemIds;
+import com.monov.commons.dto.ItemIdsDTO;
 import com.monov.commons.dto.StudentDTO;
 import com.monov.commons.exceptions.ItemNotFoundException;
 import com.monov.student.entity.Student;
@@ -38,7 +38,7 @@ public class StudentService {
         return convertToStudentDTOs(studentRepository.findAll());
     }
 
-    public List<StudentDTO> findStudentsByIds(ItemIds studentIds) {
+    public List<StudentDTO> findStudentsByIds(ItemIdsDTO studentIds) {
         return convertToStudentDTOs(studentRepository.findAllById(studentIds.getIds()));
     }
 

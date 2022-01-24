@@ -1,0 +1,12 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: STUDENT-SERVICE
+  jpa:
+    defer-datasource-initialization: true
+
+exceptions:
+  item-not-found:
+    message: Student with id %d not found
