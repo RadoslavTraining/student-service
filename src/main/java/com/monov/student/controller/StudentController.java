@@ -1,6 +1,6 @@
 package com.monov.student.controller;
 
-import com.monov.commons.dto.ItemIds;
+import com.monov.commons.dto.ItemIdsDTO;
 import com.monov.commons.dto.StudentDTO;
 import com.monov.student.entity.Student;
 import com.monov.student.response.StudentResponseHandler;
@@ -45,7 +45,7 @@ public class StudentController {
     }
 
     @PostMapping("/ids")
-    public ResponseEntity<List<StudentDTO>> findStudentsByIds(@RequestBody ItemIds studentIds) {
+    public ResponseEntity<List<StudentDTO>> findStudentsByIds(@RequestBody ItemIdsDTO studentIds) {
         return StudentResponseHandler.generateListSuccessResponse(HttpStatus.OK,
                 studentService.findStudentsByIds(studentIds));
     }
