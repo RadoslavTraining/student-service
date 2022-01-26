@@ -16,7 +16,7 @@ public class StudentResponseExceptionHandler extends ResponseEntityExceptionHand
 
     @ExceptionHandler(ItemNotFoundException.class)
     public ResponseEntity<String> handleCourseNotFoundException(ItemNotFoundException ex) {
-        return StudentResponseHandler.generateErrorResponse(String.format("Student with id %d not found", ex.getId()),
+        return StudentResponseHandler.generateErrorResponse(String.format(itemNotFoundMessage, ex.getId()),
                 HttpStatus.NOT_FOUND);
     }
 

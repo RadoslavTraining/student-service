@@ -55,22 +55,22 @@ public class StudentControllerIntTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(asJsonString(student)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(3)));
+                .andExpect(jsonPath("$.firstName", is(student.getFirstName())));
     }
 
     @Test
     public void findStudentById() throws Exception{
-        mvc.perform(get("/students/1")
+        mvc.perform(get("/students/sampleID1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(1)));
+                .andExpect(jsonPath("$.id", is("sampleID1")));
     }
 
     @Test
     public void findStudentsByIds() throws Exception {
-        ItemIdsDTO ids = new ItemIdsDTO(Arrays.asList(1L,2L));
+        ItemIdsDTO ids = new ItemIdsDTO(Arrays.asList("sampleID1","sampleID2"));
         mvc.perform(post("/students/ids")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(ids)))
