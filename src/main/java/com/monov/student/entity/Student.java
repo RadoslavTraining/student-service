@@ -21,7 +21,6 @@ import javax.validation.constraints.NotEmpty;
 public class Student {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
@@ -35,15 +34,3 @@ public class Student {
     private String lastName;
 
 }
-//    @GeneratedValue(generator = “UUID”)
-//    @GenericGenerator(
-//            name = “UUID”,
-//            strategy = “org.hibernate.id.UUIDGenerator”,
-//            parameters = {
-//                    @Parameter(
-//                            name = “uuid_gen_strategy_class”,
-//                            value = “org.hibernate.id.uuid.CustomVersionOneStrategy”
-//                    )
-//            }
-//    )
-//    @Column(name = “id”, updatable = false, nullable = false)
