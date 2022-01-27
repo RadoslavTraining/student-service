@@ -25,7 +25,7 @@ public class StudentService {
         return convertToStudentDTO(studentRepository.save(student));
     }
 
-    public StudentDTO findStudentById(Long studentId) {
+    public StudentDTO findStudentById(String studentId) {
         log.info("Inside findStudentById method in StudentService");
         Optional<Student> student = studentRepository.findById(studentId);
         if(student.isPresent()) {

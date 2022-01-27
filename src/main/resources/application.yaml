@@ -9,4 +9,4 @@ spring:
 
 exceptions:
   item-not-found:
-    message: Student with id %d not found
+    message: Student with id %s not found
