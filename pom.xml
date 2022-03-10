@@ -64,6 +64,14 @@
 			<artifactId>jasypt-spring-boot-starter</artifactId>
 			<version>3.0.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.monov</groupId>
+			<artifactId>commons</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jars/commons.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>
